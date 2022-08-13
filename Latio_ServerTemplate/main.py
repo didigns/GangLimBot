@@ -5,7 +5,9 @@ import time
 import Ganglimbot
 
 from discord.ext import commands , tasks
-from ExternalVariable import Token
+
+from boto.s3.connection import S3Connection
+Token = os.environ['Token']
 
 bot=commands.Bot(command_prefix='!')
 timenow = datetime.datetime.now()
