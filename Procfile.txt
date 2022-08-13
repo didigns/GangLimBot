@@ -1,1 +1,1 @@
-worker: python Latio_ServerTemplate\main.py
+worker: python main.py
