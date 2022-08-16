@@ -24,7 +24,7 @@ async def GangLimNotice():
         if ch.name == "강림봇":
             minute = datetime.datetime.now().strftime("%M")
             hour = datetime.datetime.now().strftime("%H")
-            if(hour == "10" or hour == "22") and minute == "00" :
+            if(hour == "12" or hour == "22") and minute == "00" :
                 channel = bot.get_channel(ch.id)
                 await channel.send("나 \"강림\"")
                 print("debugged")
