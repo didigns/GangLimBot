@@ -9,6 +9,9 @@ from discord.ext import commands , tasks
 import os
 Token = os.environ.get('Token')
 
+Firsttime = 12;
+Second = 21;
+
 bot=commands.Bot(command_prefix='!')
 timenow = datetime.datetime.now()
 waittime = 60
@@ -24,7 +27,7 @@ async def GangLimNotice():
         if ch.name == "강림봇":
             minute = datetime.datetime.now().strftime("%M")
             hour = datetime.datetime.now().strftime("%H")
-            if(hour == "10" or hour == "22") and minute == "00" :
+            if(hour == Firsttime or hour == Second) and minute == "00" :
                 channel = bot.get_channel(ch.id)
                 await channel.send("나 \"강림\"")
                 print("debugged")
@@ -32,6 +35,21 @@ async def GangLimNotice():
 
 @bot.command()
 async def 강림봇테스트(ctx):
+    await ctx.send("나 \"강림\"")
+
+@bot.command()
+async def 시간변경(ctx,msg1,msg2):
+    if msg1 == "오전" :
+        time = int(msg2)
+        Firsttime = time;
+        await ctx.send("오전 시간 :" + time + "시")
+        return
+    if msg1 == "오후" :
+        time = int(msg2)
+        Second = time;
+        await ctx.send("오후 시간 :" + time + "시")
+        return
+
     await ctx.send("나 \"강림\"")
 
 @bot.command()
