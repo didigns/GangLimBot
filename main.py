@@ -10,7 +10,7 @@ import os
 Token = os.environ.get('Token')
 
 Firsttime = 12;
-Second = 21;
+Secondtime = 21;
 
 bot=commands.Bot(command_prefix='!')
 timenow = datetime.datetime.now()
@@ -27,7 +27,7 @@ async def GangLimNotice():
         if ch.name == "강림봇":
             minute = datetime.datetime.now().strftime("%M")
             hour = datetime.datetime.now().strftime("%H")
-            if(hour == Firsttime or hour == Second) and minute == "00" :
+            if (hour == str(Firsttime) or hour == str(Secondtime)) and minute == "00" :
                 channel = bot.get_channel(ch.id)
                 await channel.send("나 \"강림\"")
                 print("debugged")
