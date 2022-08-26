@@ -9,8 +9,8 @@ from discord.ext import commands , tasks
 import os
 Token = os.environ.get('Token')
 
-Firsttime = 12;
-Secondtime = 21;
+Firsttime = "12";
+Secondtime = "21";
 
 bot=commands.Bot(command_prefix='!')
 timenow = datetime.datetime.now()
@@ -27,7 +27,7 @@ async def GangLimNotice():
         if ch.name == "강림봇":
             minute = datetime.datetime.now().strftime("%M")
             hour = datetime.datetime.now().strftime("%H")
-            if (hour == str(Firsttime) or hour == str(Secondtime)) and minute == "00" :
+            if (hour == Firsttime or hour == Secondtime) and minute == "00" :
                 channel = bot.get_channel(ch.id)
                 await channel.send("나 \"강림\"")
                 print("debugged")
@@ -40,17 +40,15 @@ async def 강림봇테스트(ctx):
 @bot.command()
 async def 시간변경(ctx,msg1,msg2):
     if msg1 == "오전" :
-        time = int(msg2)
-        Firsttime = time;
-        await ctx.send("오전 시간 :" + time + "시")
+        global Firsttime;
+        Firsttime = msg2;
+        await ctx.send("오전 시간 :" + msg2 + "시")
         return
     if msg1 == "오후" :
-        time = int(msg2)
-        Second = time;
-        await ctx.send("오후 시간 :" + time + "시")
+        global Second;
+        Second = msg2;
+        await ctx.send("오후 시간 :" + msg2 + "시")
         return
-
-    await ctx.send("나 \"강림\"")
 
 @bot.command()
 async def 강림봇테스트시간(ctx):
@@ -60,6 +58,20 @@ async def 강림봇테스트시간(ctx):
         hour = datetime.datetime.now().strftime("%H")
         minute = datetime.datetime.now().strftime("%M")
         await ctx.send("현재 시간은 :" + hour + "시" + minute + "분")
+
+@bot.command()
+async def 알림테스트(ctx,msg,msg2):
+    if msg == "오전" :
+        if (msg2 == Firsttime):
+            await ctx.send("나 \"강림\"")
+    if msg == "오후" :
+        if (str(msg2) == Secondtime):
+            await ctx.send("나 \"강림\"")
+            
+@bot.command()
+async def 알림시간출력(ctx):
+        await ctx.send("오전 시간 :" + Firsttime + "시")
+        await ctx.send("오후 시간 :" + Secondtime + "시")
 
 @bot.event
 async def on_ready():
